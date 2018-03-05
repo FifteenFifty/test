@@ -9,6 +9,7 @@ import (
     "bytes"
     "strconv"
     "mime/multipart"
+    "rb-bot/line-length"
 )
 
 type WebhookResponse struct {
@@ -378,34 +379,38 @@ fmt.Printf("\n\nURL: %s", reviewUrl)
 func Handler(w http.ResponseWriter, r *http.Request) {
 }
 
+//func main() {
+//    fmt.Printf("I received a request\n\n")
+//
+//    var reviewId string = "2"
+//
+//    err, diffLink := GetLatestDiffLink()
+//    if (err != nil) {
+//        log.Fatal(err)
+//    }
+//
+//    err, diff := GetDiffedFiles(diffLink)
+//
+//    if (err != nil) {
+//        log.Fatal(err)
+//    }
+//
+//    var diffFiles []FileDiff
+//    var fileDiff    FileDiff
+//
+//    for _, element := range diff.Files {
+//        err, fileDiff = GetFileDiff(element.Links.Self.Href)
+//        fileDiff.Id = element.Id
+//        diffFiles = append(diffFiles,fileDiff)
+//    }
+//
+//    // Add comments to lines of the files
+//    RunCheckers(&diffFiles)
+//    SendComments(reviewId, diffFiles)
+//}
+
 func main() {
-    fmt.Printf("I received a request\n\n")
-
-    var reviewId string = "2"
-
-    err, diffLink := GetLatestDiffLink()
-    if (err != nil) {
-        log.Fatal(err)
-    }
-
-    err, diff := GetDiffedFiles(diffLink)
-
-    if (err != nil) {
-        log.Fatal(err)
-    }
-
-    var diffFiles []FileDiff
-    var fileDiff    FileDiff
-
-    for _, element := range diff.Files {
-        err, fileDiff = GetFileDiff(element.Links.Self.Href)
-        fileDiff.Id = element.Id
-        diffFiles = append(diffFiles,fileDiff)
-    }
-
-    // Add comments to lines of the files
-    RunCheckers(&diffFiles)
-    SendComments(reviewId, diffFiles)
+    line-length.Bar()
 }
 
 //func main() {
